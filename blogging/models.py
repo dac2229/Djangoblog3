@@ -2,8 +2,7 @@ from django.db import models  # <-- This is already in the file
 from django.contrib.auth.models import User
 
 class Post(models.Model):
-    def __str__(self):
-        return self.title
+
 
     title = models.CharField(max_length=128)
     text = models.TextField(blank=True)
@@ -11,6 +10,9 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
 class Category(models.Model):
     class Meta:

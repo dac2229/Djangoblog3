@@ -5,7 +5,7 @@ class CategoryInline(admin.TabularInline):
     model = Category.posts.through
 
 '''
-I like tabular better
+#I like tabular better
 class CategoryInline(admin.StackedInline):
     model = Category.posts.through
 '''
