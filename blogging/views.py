@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
 from blogging.models import Post
+from django.shortcuts import render
 
 def stub_view(request, *args, **kwargs):
     body = "Stub View\n\n"
@@ -11,7 +12,8 @@ def stub_view(request, *args, **kwargs):
         body += "Kwargs:\n"
         body += "\n".join(["\t%s: %s" % i for i in kwargs.items()])
     return HttpResponse(body, content_type="text/plain")
-
+'''
+old view
 def list_view(request):
     published = Post.objects.exclude(published_date__exact=None)
     posts = published.order_by('-published_date')
@@ -19,3 +21,10 @@ def list_view(request):
     context = {'posts': posts}
     body = template.render(context)
     return HttpResponse(body, content_type="text/html")
+'''
+
+def list_view(request):
+    published = Post.objects.exclude(published_date__exact=None)
+    posts = published.order_by('-published_date')
+    context = {'posts': posts}
+    return render(request, 'blogging/list.html', context)
